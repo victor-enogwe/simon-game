@@ -13,15 +13,24 @@ const scssConfig: Loader[] = [
   { loader: 'sass-loader', options: { sassOptions: { outputStyle: 'nested' }, sourceMap: true } }
 ]
 
+const gFontCdn = "https://fonts.googleapis.com https://fonts.gstatic.com"
+const unsafe = "'unsafe-inline'"
+const scriptSrc = `script-src 'self'`
+const viewport = 'width=device-width, initial-scale=0.1, shrink-to-fit=no user-scalable=no'
+const content = `default-src 'self'; ${scriptSrc}; img-src 'self' data:; style-src 'self' ${unsafe} ${gFontCdn}; font-src ${gFontCdn}`
+const cspMeta = { 'http-equiv': 'Content-Security-Policy', content }
+const xCspMeta = { 'http-equiv': 'X-Content-Security-Policy', content }
+const htmlMeta = { charset: 'UTF-8', viewport, 'X-Content-Security-Policy': xCspMeta, 'Content-Security-Policy': cspMeta }
+
 const htmlConfig: HtmlWebpack.Options = {
   title: 'Simon Game',
   templateContent: '<body><simon-game></simon-game></body>',
   hash: false,
   filename: 'index.html',
-  meta: { viewport: 'width=device-width, initial-scale=1, shrink-to-fit=yes' }
+  meta: htmlMeta
 }
 
-const fonts = ['//fonts.googleapis.com/css?family=Montserrat:300,400,600,700&amp;lang=en']
+const fonts = ['https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700&amp;lang=en']
 
 const HtmlWebpackPlugin = new HtmlWebpack(htmlConfig)
 
