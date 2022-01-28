@@ -37,7 +37,7 @@ function pattern(state: Pattern | undefined = initialState.pattern, action: Patt
     case PATTERN.NEXT_LEVEL:
       return { prev: state, pattern: moves(state ? state.pattern : []) }
     case PATTERN.RESET_LEVEL:
-      return { prev: state?.prev?.prev, pattern: randomMoves(state ? state.pattern : []) }
+      return { prev: state?.prev?.prev ?? {}, pattern: randomMoves(state ? state.pattern : []) }
     case PATTERN.PREV_LEVEL:
       return state ? state.prev : undefined
     case PATTERN.RESET:

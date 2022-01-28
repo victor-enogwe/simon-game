@@ -1,4 +1,4 @@
-import { InitialState, ComponentProps } from 'global'
+import { ComponentProps, InitialState } from 'global'
 import React from 'react'
 import { connect } from 'react-redux'
 import { ModeButton, PlayButton } from './control'

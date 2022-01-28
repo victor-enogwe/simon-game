@@ -6,7 +6,7 @@ html {
     width: 100%;
     justify-content: center;
     align-items: center;
-    background-color: #ff5300;
+    background-color: #000;
     font-family: Montserrat;
   }
 
@@ -214,13 +214,9 @@ html {
     height: 45%;
     margin: 10px;
     border: none;
-    opacity: 0.6;
+    opacity: 0.1;
 
-    &.active:hover {
-      opacity: 1;
-    }
-
-    &.active:active {
+    &.active {
       opacity: 1;
       transform: translateY(4px);
     }
@@ -235,22 +231,22 @@ html {
     }
 
     &#one {
-      background-color: rgb(124, 151, 61);
+      background-color: rgb(144, 238, 144);
       border-top-left-radius: 100%;
     }
 
     &#two {
-      background-color: rgb(153, 98, 30);
+      background-color: rgb(255, 127, 127);
       border-top-right-radius: 100%;
     }
 
     &#three {
-      background-color: rgb(86, 63, 27);
+      background-color: rgb(255, 255, 224);
       border-bottom-left-radius: 100%;
     }
 
     &#four {
-      background-color: rgb(211, 63, 73);
+      background-color: rgb(173, 216, 230);
       border-bottom-right-radius: 100%;
     }
   }

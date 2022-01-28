@@ -53,3 +53,9 @@ export type PlayerPatternAction = { type: PLAYER_PATTERN.RECORD_PLAYER_PATTERN |
 export type CombineActions = PowerAction | PlayAction | ModeAction | PatternAction | TurnAction | PlayerPatternAction | ResetAction
 
 export type ComponentProps<connector> = PropsFromRedux<connector>
+
+export type SwitchComponentProps = {
+  togglePower: (state: POWER.ON | POWER.OFF) => { type: POWER.POWER_OFF | POWER.POWER_ON }
+  power: POWER.ON | POWER.OFF
+  disabled: boolean
+}

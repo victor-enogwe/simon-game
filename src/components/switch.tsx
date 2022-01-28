@@ -1,17 +1,20 @@
-import { SwitchComponentProps } from 'global'
-import React, { createRef } from 'react'
+import React, { ComponentType, createRef, PropsWithoutRef } from 'react'
 import { connect } from 'react-redux'
+import { SwitchComponentProps } from '../@types/global'
 import { mapState, POWER } from '../store'
 
 const togglePower = (state: POWER.ON | POWER.OFF) => ({ type: Boolean(state) ? POWER.POWER_OFF : POWER.POWER_ON })
 
 const connector = connect(mapState<'power'>('power'), { togglePower })
 
-export const Switch = connector(function (props: SwitchComponentProps<typeof connector>) {
+export const Switch: ComponentType<{ disabled: boolean }> = connector(SwitchComponent as any)
+
+function SwitchComponent (props: PropsWithoutRef<SwitchComponentProps>) {
   const inputRef = createRef<HTMLInputElement>()
+
   return <div className="switch">
     <small>OFF</small>
-    <div className="toggle" onClick={() => (inputRef.current as HTMLInputElement).click()}>
+    <div className="toggle" onClick={() => inputRef?.current?.click()} onKeyDown={() => inputRef?.current?.click()} role="button">
       <input
         ref={inputRef}
         hidden={true}
@@ -25,4 +28,4 @@ export const Switch = connector(function (props: SwitchComponentProps<typeof con
     </div>
     <small>ON</small>
   </div>
-})
+}

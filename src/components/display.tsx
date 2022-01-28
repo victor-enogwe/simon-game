@@ -8,7 +8,7 @@ const connector = connect(mapState('pattern'))
 export const Display = connector(function (props: ComponentProps<typeof connector>) {
   return <div className="control display">
     <div className="screen">
-      <span>{props.pattern && props.pattern.pattern ? props.pattern.pattern.length - 1 : '--'}</span>
+      <span>{props.pattern && props.pattern.pattern ? props.pattern.pattern.length : '--'}</span>
     </div>
     <small>LEVEL</small>
   </div>

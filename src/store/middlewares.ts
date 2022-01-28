@@ -23,7 +23,8 @@ export function effectsMiddleware(store: MiddlewareAPI<Dispatch<CombineActions>>
       case TURN.PLAYER_AI:
         return aiTurn(state.pattern as Pattern)(store.dispatch)
       case TURN.PLAYER_AI_FINISHED:
-        return alert('YOUR TURN').then(() => store.dispatch({ type: TURN.PLAYER_HUMAN }))
+        store.dispatch({ type: TURN.PLAYER_HUMAN })
+        return alert('YOUR TURN')
       case TURN.VALIDATE_PLAYER_MOVE:
         return alert('VALIDATING PLAYER MOVE').then(() => {
           const { pattern: aiPattern = {}, playerPattern = [] } = state
@@ -32,13 +33,13 @@ export function effectsMiddleware(store: MiddlewareAPI<Dispatch<CombineActions>>
         })
       case TURN.INVALID_MOVE:
         return alert('INVALID MOVE')
-          .then(() => alert(state.mode ? 'MOVES RESET, REPEAT LEVEL' : 'MOVES REPLAY, REPEAT LEVEL'))
+          .then(() => alert(state.mode ? 'MOVES RESET' : 'MOVES REPLAY'))
+          .then(() => alert(state.mode ? 'RESTART LEVEL' : 'REPEAT LEVEL'))
           .then(() => store.dispatch({ type: state.mode ? PATTERN.RESET_LEVEL : PATTERN.REPEAT_LEVEL }))
       case TURN.VALID_MOVE:
-        return alert('VALID MOVE, NEXT LEVEL!').then(() => store.dispatch({ type: PATTERN.NEXT_LEVEL }))
+        return alert('VALID MOVE').then(() => alert('NEXT LEVEL!')).then(() => store.dispatch({ type: PATTERN.NEXT_LEVEL }))
       case TURN.MOVE_COMPLETED:
         const moveComplete = state.pattern?.pattern?.length === state.playerPattern.length
-        console.log(moveComplete)
         if (!moveComplete) return
         return store.dispatch({ type: TURN.VALIDATE_PLAYER_MOVE })
 
